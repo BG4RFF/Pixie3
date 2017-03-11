@@ -466,8 +466,8 @@ void loop(){
 //  setSideband();
 //  setBandswitch();
 
-	if (frequency >= 7300000){frequency=7300000;}; // UPPER VFO LIMIT
-	if (frequency <= 6998000){frequency=6998000;}; // LOWER VFO LIMIT
+	if (frequency >= 7200000){frequency=7200000;}; // UPPER VFO LIMIT
+	if (frequency <= 7000000){frequency=7000000;}; // LOWER VFO LIMIT
 
 	vfo->setFrequency(frequency + IF_FREQ);
 //        Serial.println(frequency + IF_FREQ);
