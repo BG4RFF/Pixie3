@@ -50,16 +50,16 @@
 */
 
 #define SI570_I2C_ADDRESS 0x55
-// #define IF_FREQ   (19996400l)  // USB BFO, this is for usb, we should probably have the USB and LSB frequencies separately
+//#define IF_FREQ   (19996400l)  // USB BFO, this is for usb, we should probably have the USB and LSB frequencies separately
 #define CW_TIMEOUT (600l) // in milliseconds, this is the parameter that determines how long the tx will hold between cw key downs
 
 // When RUN_TESTS is 1, the Radiono will automatically do some software testing when it starts.
 // Please note, that those are not hardware tests! - Comment this line to save some space.
 #define RUN_TESTS 1
 
-unsigned long IF_FREQ = 0L;	//default for 7 mhz
-unsigned long IF_USB = 0L;
-unsigned long IF_LSB = 0L;
+unsigned long IF_FREQ = 6000000L;	//default for 7 mhz
+unsigned long IF_USB = 6000000L;
+unsigned long IF_LSB = 6000000L;
 unsigned long IF_CW = 0L;  // center freq +100 Hz
 
 unsigned long frequency = 7000000L;   // default freq = 14 mhz
@@ -204,12 +204,12 @@ void setSideband(){
   {
     isLSB = 0;
     digitalWrite(LSB, 0);
-    IF_FREQ=IF_USB;
+//    IF_FREQ=IF_USB;
   }
   else{
     digitalWrite(LSB, 1);
     isLSB = 1;
-    IF_FREQ=IF_LSB;
+//    IF_FREQ=IF_LSB;
   }
   if (ritOn == 1) {
 //    IF_FREQ=IF_CW;
@@ -264,7 +264,7 @@ void checkTuning(){
       frequency += 3000;
     else if (tuningPosition < 450){
       frequency += 100000;
-      updateDisplay();
+//      updateDisplay();
       delay(300);
     }
     else if (tuningPosition < 500){
@@ -301,7 +301,7 @@ void checkTuning(){
     }
   }
   delay(50);
-  refreshDisplay++;
+//  refreshDisplay++;
 //  Serial.println(frequency + IF_FREQ);
   Serial.println(frequency);
 }
@@ -319,7 +319,7 @@ void checkTX(){
       digitalWrite(TX_RX, 1);
       //give the relays a few ms to settle the T/R relays
       delay(50);
-    refreshDisplay++;
+//    refreshDisplay++;
     inTx = 1;
   }
 
@@ -329,7 +329,7 @@ void checkTX(){
       digitalWrite(TX_RX, 0);
       //give the relays a few ms to settle the T/R relays
       delay(50);
-    refreshDisplay++;
+//    refreshDisplay++;
     inTx = 0;
   }
 }
@@ -353,7 +353,7 @@ void checkCW(){
     inTx = 1;
     keyDown = 1;
     digitalWrite(CW_KEY, 1); //start the side-tone
-    refreshDisplay++;
+//    refreshDisplay++;
   }
 
   //reset the timer as long as the key is down
@@ -377,7 +377,7 @@ void checkCW(){
 //    digitalWrite(TX_RX, 1); //pull-up!
     inTx = 0;
     cwTimeout = 0;
-    refreshDisplay++;
+//    refreshDisplay++;
   }
 }
 
@@ -444,7 +444,7 @@ void checkButton(){
   else if (t1 > 10){
 //    printLine2("VFOs reset!");
     vfoA= vfoB = frequency;
-    refreshDisplay++;
+//    refreshDisplay++;
   }
 
   while (btnDown() == 1){
